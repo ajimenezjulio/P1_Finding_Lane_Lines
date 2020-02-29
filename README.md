@@ -7,9 +7,6 @@ Lane line detection is a fundamental technique for the design of algorithms that
 
 This project uses an approach based on image processing, it uses Python as the main language and OpenCV as complementary framework for image analysis and processing.
 
-The goals / steps of this project are the following:
-* Make a pipeline that finds lane lines on the road
-* Reflect on your work in a written report
 ---
 
 ### 1. Approach
