@@ -1,3 +1,6 @@
+[![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
+[![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
+
 # **Finding Lane Lines on the Road** 
 
 Lane line detection is a fundamental technique for the design of algorithms that allows a car to drive itself. The detection of these lines allows our car to stay on right path and follow it, in the same way that we use our eyes to stay on the lane.
@@ -38,8 +41,8 @@ Edge\_Gradient \; (G) = \sqrt{G_x^2 + G_y^2}
 <p align="center" style="text-align: center;"><img align="center" src="https://tex.s2cms.ru/svg/%0AAngle%20%5C%3B%20(%5Ctheta)%20%3D%20%5Ctan%5E%7B-1%7D%20%5Cbigg(%5Cfrac%7BG_y%7D%7BG_x%7D%5Cbigg)%0A" alt="
 Angle \; (\theta) = \tan^{-1} \bigg(\frac{G_y}{G_x}\bigg)
 " /></p>
-	
-	Consecutively non-maximum suppression is applied on the image for edge thining and  finally, hysteresis thresholding is applied to suppress undesired edges, for this project the range was defined as <img src="https://render.githubusercontent.com/render/math?math=threshold(80 - 200)">.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Consecutively non-maximum suppression is applied on the image for edge thining and  finally, hysteresis &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;thresholding is applied to suppress undesired edges, for this project the range was defined as <img src="https://render.githubusercontent.com/render/math?math=threshold(80 - 200)">.
 
 4. **Mask region of interest** : The mask of the region of interest is an isoceles trapezoid where the lower base is calculated using the width of the image as reference (<img src="https://render.githubusercontent.com/render/math?math=b_i = img_w * 2\alpha">), the height takes the height of the image (<img src="https://render.githubusercontent.com/render/math?math=img_h * \beta">), and the upper base is calculated taking as reference the image width where its middle point will be the middle point of the image (<img src="https://render.githubusercontent.com/render/math?math=b_s = img_w * 2\lambda">). In this project the values used were <img src="https://render.githubusercontent.com/render/math?math=\alpha =0.1\,, \beta = 0.6\,, \lambda = 0.1">.
 
@@ -81,11 +84,11 @@ min_{lineLength} = 40
 	
 6. **Average Lines** : With the lines identified in the region of interest the final step is to obtain only 2 lines that will delimit the lane. As seen in the trapezoid figure the line on the left and on the right will have different slopes, so two arrays were used to save each of the lines:
 
-<p align="center" style="text-align: center;"><img align="center" src="https://tex.s2cms.ru/svg/%0Aline%20%5Cin%20%0A%09%5Cbegin%7Bcases%7D%0A%09%5Coverline%7Blines_n%7D%20%26%20if%20-%5Cinfty%20%3C%20m%20%3C%200%2C%20%26%20%7Cm%7C%20%3E%20%5Calpha%20%5C%5C%0A%09%5Coverline%7Blines_p%7D%20%26%20if%5C%20%200%20%3C%20m%20%3C%20%5Cinfty%2C%20%26%7Cm%7C%20%3E%20%5Calpha%0A%09%5Cend%7Bcases%7D%0A" alt="
+<p align="center" style="text-align: center;"><img align="center" src="https://tex.s2cms.ru/svg/%0Aline%20%5Cin%20%0A%09%5Cbegin%7Bcases%7D%0A%09%5Coverline%7Blines_n%7D%2C%20%26%20if%20-%5Cinfty%20%3C%20m%20%3C%200%2C%5C%2C%5C%2C%5C%2C%5C%2C%20%7Cm%7C%20%3E%20%5Calpha%20%5C%5C%0A%09%5Coverline%7Blines_p%7D%2C%20%26%20if%5C%20%200%20%3C%20m%20%3C%20%5Cinfty%2C%5C%2C%5C%2C%5C%2C%5C%2C%5C%2C%5C%2C%5C%2C%5C%2C%5C%2C%5C%2C%7Cm%7C%20%3E%20%5Calpha%0A%09%5Cend%7Bcases%7D%0A" alt="
 line \in 
 	\begin{cases}
-	\overline{lines_n} &amp; if -\infty &lt; m &lt; 0, &amp; |m| &gt; \alpha \\
-	\overline{lines_p} &amp; if\  0 &lt; m &lt; \infty, &amp;|m| &gt; \alpha
+	\overline{lines_n}, &amp; if -\infty &lt; m &lt; 0,\,\,\,\, |m| &gt; \alpha \\
+	\overline{lines_p}, &amp; if\  0 &lt; m &lt; \infty,\,\,\,\,\,\,\,\,\,\,|m| &gt; \alpha
 	\end{cases}
 " /></p>
 
