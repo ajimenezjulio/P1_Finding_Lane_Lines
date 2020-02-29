@@ -29,7 +29,7 @@ G_i= \alpha *e^{-(i-( \texttt{ksize} -1)/2)^2/(2* \sigma^2)}
 \sigma = 0.3*((ksize-1)*0.5 - 1) + 0.8
 " /></p>
 	
-3. **Canny edge detection** : After blurring a canny edge detection was applied, Canny is a complex technique that work in 4 steps. First a gaussian blurring is computed, then the first derivative in horizontal ($G_x$) and vertical ($G_y$) direction are calculated through the Sobel kernel to find the edge gradient and direction as follows:
+3. **Canny edge detection** : After blurring a canny edge detection was applied, Canny is a complex technique that work in 4 steps. First a gaussian blurring is computed, then the first derivative in horizontal (<img src="https://render.githubusercontent.com/render/math?math=G_x">) and vertical (<img src="https://render.githubusercontent.com/render/math?math=G_y">) direction are calculated through the Sobel kernel to find the edge gradient and direction as follows:
 
 <p align="center" style="text-align: center;"><img align="center" src="https://tex.s2cms.ru/svg/%0AEdge%5C_Gradient%20%5C%3B%20(G)%20%3D%20%5Csqrt%7BG_x%5E2%20%2B%20G_y%5E2%7D%0A" alt="
 Edge\_Gradient \; (G) = \sqrt{G_x^2 + G_y^2}
@@ -39,9 +39,9 @@ Edge\_Gradient \; (G) = \sqrt{G_x^2 + G_y^2}
 Angle \; (\theta) = \tan^{-1} \bigg(\frac{G_y}{G_x}\bigg)
 " /></p>
 	
-Consecutively non-maximum suppression is applied on the image for edge thining and  finally, hysteresis thresholding is applied to suppress undesired edges, for this project the range was defined as $threshold(80 - 200)$.
+Consecutively non-maximum suppression is applied on the image for edge thining and  finally, hysteresis thresholding is applied to suppress undesired edges, for this project the range was defined as <img src="https://render.githubusercontent.com/render/math?math=threshold(80 - 200)">.
 
-4. **Mask region of interest** : The mask of the region of interest is an isoceles trapezoid where the lower base is calculated using the width of the image as reference ($b_i = img_w * 2\alpha$), the height takes the height of the image ($img_h * \beta$), and the upper base is calculated taking as reference the image width where its middle point will be the middle point of the image ($b_s = img_w * \lambda$). In this project the values used were $\alpha =0.1$, $\beta = 0.6$, $\lambda = 0.1$.
+4. **Mask region of interest** : The mask of the region of interest is an isoceles trapezoid where the lower base is calculated using the width of the image as reference (<img src="https://render.githubusercontent.com/render/math?math=b_i = img_w * 2\alpha">), the height takes the height of the image (<img src="https://render.githubusercontent.com/render/math?math=img_h * \beta">), and the upper base is calculated taking as reference the image width where its middle point will be the middle point of the image (<img src="https://render.githubusercontent.com/render/math?math=b_s = img_w * 2\lambda">$). In this project the values used were <img src="https://render.githubusercontent.com/render/math?math=\alpha =0.1\,, \beta = 0.6\,, \lambda = 0.1">.
 
 <p align="center" style="text-align: center;"><img align="center" src="https://tex.s2cms.ru/svg/%0A%5Cbegin%7Btikzpicture%7D%5Bisosceleles%20trapezium%2F.style%20args%3D%7Bof%20width%20%231%20and%20height%20%232%0Aand%20name%20%233%7D%7Binsert%20path%3D%7B%0A(45%3A%7B%231%2Fsqrt(2)%7D)%20coordinate(%233-TR)%20--%20(-45%3A%7Bsqrt(%232*%232-%231*%231%2F2)%7D)%20coordinate(%233-BR)%20%0A--%20(-135%3A%7Bsqrt(%232*%232-%231*%231%2F2)%7D)%20coordinate(%233-BL)%20--%20(135%3A%7B%231%2Fsqrt(2)%7D)%20coordinate(%233-TL)%20--%20cycle%7D%7D%5D%0A%5Cdraw%5Bisosceleles%20trapezium%3Dof%20width%201%20and%20height%203%20and%20name%20my%20trap%5D%3B%0A%5Cdraw%5Blatex-latex%5D%20(%5Byshift%3D3mm%5Dmy%20trap-TL)%20--%20(%5Byshift%3D3mm%5Dmy%20trap-TR)%0Anode%5Bmidway%2Cfill%3Dwhite%5D%20%7B%24b_s%24%7D%3B%0A%5Cdraw%5Blatex-latex%5D%20(%5Bxshift%3D-2mm%5Dmy%20trap-TL%20-%7C%20my%20trap-BL)%20--%20%0A(%5Bxshift%3D-2mm%5Dmy%20trap-BL)%20node%5Bmidway%2Cfill%3Dwhite%5D%20%7B%24h%24%7D%3B%0A%5Cdraw%5Bdraw%3Dblack%20and%20name%20myRect%5D%20(-2.8%2C%201.7)%20rectangle%20%2B%2B(5.5%2C-3.75)%3B%0A%5Cdraw%5Blatex-latex%5D%20(%5Bxshift%3D-8mm%2C%20yshift%3D-3mm%5D%20my%20trap-BL)%20--%20(%5Byshift%3D-3mm%5D%20my%20trap-BL)%0Anode%5Bmidway%2Cfill%3Dwhite%5D%20%7B%24%5Calpha%24%7D%3B%0A%5Cdraw%5Blatex-latex%5D%20(%5Byshift%3D-3mm%5D%20my%20trap-BL)%20--%20(%5Byshift%3D-3mm%5D%20my%20trap-BR)%0Anode%5Bmidway%2Cfill%3Dwhite%5D%20%7B%24b_i%24%7D%3B%0A%5Cend%7Btikzpicture%7D%0A" alt="
 \begin{tikzpicture}[isosceleles trapezium/.style args={of width #1 and height #2
@@ -61,11 +61,11 @@ node[midway,fill=white] {$b_i$};
 \end{tikzpicture}
 " /></p>
 
-5. **Hough Transform** : Hough transform is a feature extraction method for detecting simple shapes such as circles, lines etc in an image. The line general equation ($y= mx + b$) presents the problem that $m$ can take values between $-\infty$ to $\infty$, so for bounding to a finite state the polar system is used changing the equation into $\rho = x cos(\theta) + y sin(\theta)$.
+5. **Hough Transform** : Hough transform is a feature extraction method for detecting simple shapes such as circles, lines etc in an image. The line general equation (<img src="https://render.githubusercontent.com/render/math?math=y= mx + b">) presents the problem that $m$ can take values between <img src="https://render.githubusercontent.com/render/math?math=-\infty"> to <img src="https://render.githubusercontent.com/render/math?math=\infty">, so for bounding to a finite state the polar system is used changing the equation into <img src="https://render.githubusercontent.com/render/math?math=\rho = x cos(\theta) + y sin(\theta)">.
 
-	Next step is to initialize a new 2D plane called accumulator where we will trace the function of every pixel while varying the value of $\theta$, the intersection points correspond to lines in the Cartesian plane, a vocation occurs to ignore lines that don't met criteria. The next parameters were used in this project:
+	Next step is to initialize a new 2D plane called accumulator where we will trace the function of every pixel while varying the value of <img src="https://render.githubusercontent.com/render/math?math=\theta">, the intersection points correspond to lines in the Cartesian plane, a vocation occurs to ignore lines that don't met criteria. The next parameters were used in this project:
 
-<p align="center" style="text-align: center;"><img align="center" src="https://tex.s2cms.ru/svg/%0A%5Crho%20%3D%202%20%0A%09%20%20%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%20%0A%09%20%20%5Ctheta%20%3D%20%5Cpi%2F2%20%0A%09%20%20%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%20%20%0A%09%20%20min_%7Bvotes%7D%20%3D%2020%0A" alt="
+<p align="center" style="text-align: center;"><img align="center" src="https://tex.s2cms.ru/svg/%0A%5Crho%20%3D%202%20%0A%09%20%20%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%20%0A%09%20%20%5Ctheta%20%3D%20%5Cpi%2F180%20%0A%09%20%20%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%20%20%0A%09%20%20min_%7Bvotes%7D%20%3D%2020%0A" alt="
 \rho = 2 
 	  \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; 
 	  \theta = \pi/180 
@@ -89,7 +89,7 @@ line \in
 	\end{cases}
 " /></p>
 
-Where $\alpha$ represents a threshold to ignore non-related lines. Each array stores the lines coefficients ($m, b$), then a single $m$ and $b$ coefficient is calculated in each array by averaging.
+Where <img src="https://render.githubusercontent.com/render/math?math=\alpha"> represents a threshold to ignore non-related lines. Each array stores the lines coefficients (<img src="https://render.githubusercontent.com/render/math?math=m, b">), then a single <img src="https://render.githubusercontent.com/render/math?math=m"> and <img src="https://render.githubusercontent.com/render/math?math=b"> coefficient is calculated in each array by averaging.
 
 <p align="center" style="text-align: center;"><img align="center" src="https://tex.s2cms.ru/svg/%0A%5Coverline%20m%20%3D%20%5Cdfrac%7B%5Csum%5Ei_%7Bn%7D%20m_i%7D%7Bn%7D%20%0A%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%0A%5Coverline%20b%20%3D%20%5Cdfrac%7B%5Csum%5Ei_%7Bn%7D%20m_i%7D%7Bn%7D%20%0A" alt="
 \overline m = \dfrac{\sum^i_{n} m_i}{n} 
@@ -103,7 +103,7 @@ In order to build a line in the image, we need the coordinates of two points, fo
 x = \dfrac{y - b}{m}
 " /></p>
 
-The only remaining pieces to complete the puzzle are the $y_1$ and $y_2$ values; $y_1$ was taken as the minimum $y$ point between all the lines detected in the Hough Transform and $y_2$ refers to the image height.
+The only remaining pieces to complete the puzzle are the <img src="https://render.githubusercontent.com/render/math?math=y_1"> and <img src="https://render.githubusercontent.com/render/math?math=y_2"> values; <img src="https://render.githubusercontent.com/render/math?math=y_1"> was taken as the minimum <img src="https://render.githubusercontent.com/render/math?math=y"> point between all the lines detected in the Hough Transform and <img src="https://render.githubusercontent.com/render/math?math=y_2"> refers to the image height.
 
 <p align="center" style="text-align: center;"><img align="center" src="https://tex.s2cms.ru/svg/%0Ay_1%20%3D%20%5Cmin%5Climits_i%0A(line%5Ei_%7By_1%7D%2C%20line%5Ei_%7By_2%7D)%0A%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%0Ay_2%20%3D%20img_h%0A" alt="
 y_1 = \min\limits_i
